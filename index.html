@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMORA - Encuentra tu Conexión</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            amora: {
+              primary: '#FF3B5C',
+              medium: '#FF6B81',
+              light: '#FF9AA2',
+              dark: '#1E1E1E',
+              bg: '#F7F7F7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <!-- Mobile-first App Container -->
+  <div id="splash-container" class="app-container w-full bg-amora-grad text-white flex flex-col items-center justify-center overflow-hidden transition-all duration-500 shadow-premium relative">
+    
+    <!-- Floating Background Elements (Decorative) -->
+    <div class="absolute w-64 h-64 bg-white opacity-5 rounded-full -top-12 -left-12 floating-bubble-1"></div>
+    <div class="absolute w-48 h-48 bg-white opacity-5 rounded-full -bottom-8 -right-8 floating-bubble-2"></div>
+    <div class="absolute w-32 h-32 bg-white opacity-5 rounded-full top-1/2 left-3/4 floating-bubble-3"></div>
+
+    <!-- Central Logo and Slogan -->
+    <div class="z-10 flex flex-col items-center animate-splash-logo text-center px-6">
+      <div class="w-32 h-32 mb-6 drop-shadow-lg">
+        <!-- Inline Logo to prevent flash of unstyled content -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+          <defs>
+            <filter id="splash-logo-shadow" x="-10%" y="-10%" width="130%" height="130%">
+              <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.15" />
+            </filter>
+          </defs>
+          <!-- Heart shape -->
+          <path d="M50 85C50 85 18 56 18 35C18 21 28 12 40 12C46 12 48 15 50 17C52 15 54 12 60 12C72 12 82 21 82 35C82 56 50 85 50 85Z" fill="#FFFFFF" filter="url(#splash-logo-shadow)" />
+          <!-- Elegant letter 'A' integrated inside -->
+          <path d="M50 28C51.5 28 53 30 53.5 31.5L62 53C62.5 54.5 61.5 56 60 56C59 56 58.2 55.2 57.8 54.2L55.5 48H44.5L42.2 54.2C41.8 55.2 41 56 40 56C38.5 56 37.5 54.5 38 53L46.5 31.5C47 30 48.5 28 50 28ZM45.5 44H54.5L50 31.5L45.5 44Z" fill="#FF3B5C" />
+        </svg>
+      </div>
+      <h1 class="text-4xl font-extrabold tracking-widest uppercase mb-2">AMORA</h1>
+      <p class="text-white/80 font-medium text-sm tracking-wide">Amor a primera vista</p>
+    </div>
+
+    <!-- Spinner Loader Bottom -->
+    <div class="absolute bottom-16 flex flex-col items-center">
+      <div class="w-8 h-8 border-4 border-white/20 border-t-white rounded-full animate-spin mb-3"></div>
+      <span class="text-xs text-white/60 tracking-wider">Cargando tu destino...</span>
+    </div>
+  </div>
+
+  <script>
+    // Splash Redirection logic
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const container = document.getElementById('splash-container');
+        // Apply exit animation classes
+        container.classList.add('animate-splash-exit');
+        
+        // Wait for exit animation to complete, then redirect
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 600); // matching the transition duration
+      }, 2000); // 2 seconds display
+    });
+  </script>
+</body>
+</html>

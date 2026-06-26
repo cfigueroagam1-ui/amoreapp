@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMORA - Notificaciones</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            amora: {
+              primary: '#FF3B5C',
+              medium: '#FF6B81',
+              light: '#FF9AA2',
+              dark: '#1E1E1E',
+              bg: '#F7F7F7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="app-container w-full bg-white flex flex-col justify-between overflow-y-auto shadow-premium min-h-screen">
+    
+    <!-- Header injected by components.js -->
+    <header id="global-header"></header>
+
+    <!-- Main Content -->
+    <main class="flex-grow p-6 space-y-6">
+      
+      <!-- Screen Header -->
+      <div class="flex justify-between items-center">
+        <div>
+          <h2 class="text-2xl font-bold text-gray-800">Notificaciones</h2>
+          <p class="text-xs text-gray-400 mt-0.5">Entérate de quién interactúa contigo</p>
+        </div>
+        <!-- Clear all button -->
+        <button id="clear-all-btn" class="text-xs text-amora-primary font-bold hover:underline">Limpiar todo</button>
+      </div>
+
+      <!-- Notifications List -->
+      <div id="notifications-list" class="space-y-4">
+        <!-- Loaded Dynamically via JS -->
+      </div>
+
+    </main>
+
+    <!-- Footer injected by components.js -->
+    <footer id="global-footer"></footer>
+
+  </div>
+
+  <!-- Database & Components -->
+  <script src="assets/js/mockData.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      renderNotifications();
+
+      // Clear all click handler
+      document.getElementById('clear-all-btn').addEventListener('click', () => {
+        window.AMORA_DATA.notifications = [];
+        renderNotifications();
+        window.initNavigation(); // Refresh bell counts in navbar
+        window.showToast("Bandeja de notificaciones limpia", "success");
+      });
+    });
+
+    function renderNotifications() {
+      const container = document.getElementById('notifications-list');
+      const list = window.AMORA_DATA.notifications;
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-16 px-6">
+            <div class="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center mx-auto text-gray-300 mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+            </div>
+            <p class="text-gray-400 text-sm">No tienes notificaciones por el momento.</p>
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach(notif => {
+        // Mark as read immediately when viewed on page load
+        notif.read = true;
+        
+        const card = document.createElement('div');
+        card.id = `notif-card-${notif.id}`;
+        
+        // Custom background style for unread vs read
+        card.className = `flex items-start gap-4 p-4 border border-gray-100 rounded-3xl hover:bg-gray-50/50 transition-all duration-300 relative shadow-sm`;
+        
+        let redirectUrl = '#';
+        if (notif.type === 'match') {
+          redirectUrl = `messages.html`; // Can point to messages
+        } else if (notif.type === 'like') {
+          redirectUrl = `explore.html`;
+        }
+
+        card.innerHTML = `
+          <!-- Left Avatar / Icon -->
+          <div class="w-11 h-11 rounded-full border border-gray-100 overflow-hidden flex-shrink-0 bg-gray-50 flex items-center justify-center cursor-pointer" onclick="window.location.href='${redirectUrl}'">
+            ${notif.avatar}
+          </div>
+
+          <!-- Body -->
+          <div class="flex-grow min-w-0 pr-6 cursor-pointer" onclick="window.location.href='${redirectUrl}'">
+            <h4 class="font-bold text-gray-800 text-sm">${notif.title}</h4>
+            <p class="text-xs text-gray-500 mt-1 leading-relaxed">${notif.body}</p>
+            <span class="text-[9px] text-gray-400 mt-2 block font-semibold">${notif.time}</span>
+          </div>
+
+          <!-- Action Close Dismiss Button -->
+          <button onclick="dismissNotification(${notif.id})" class="absolute top-4 right-4 text-gray-300 hover:text-gray-500 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        `;
+        
+        container.appendChild(card);
+      });
+
+      // Update navbar bell count badge since we marked all read
+      window.initNavigation();
+    }
+
+    // Dismiss a single notification with fade out effect
+    window.dismissNotification = function(id) {
+      event.stopPropagation();
+      const card = document.getElementById(`notif-card-${id}`);
+      if (card) {
+        card.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          window.AMORA_DATA.notifications = window.AMORA_DATA.notifications.filter(n => n.id !== id);
+          renderNotifications();
+          window.initNavigation(); // Redraw header bell badge
+          window.showToast("Notificación descartada", "info");
+        }, 300);
+      }
+    };
+  </script>
+</body>
+</html>

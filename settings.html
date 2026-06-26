@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMORA - Ajustes de Cuenta</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            amora: {
+              primary: '#FF3B5C',
+              medium: '#FF6B81',
+              light: '#FF9AA2',
+              dark: '#1E1E1E',
+              bg: '#F7F7F7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="app-container w-full bg-white flex flex-col justify-between overflow-y-auto shadow-premium min-h-screen">
+    
+    <!-- Header injected by components.js -->
+    <header id="global-header"></header>
+
+    <!-- Main Content -->
+    <main class="flex-grow p-6 space-y-6">
+      
+      <!-- Section Title -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-800">Ajustes</h2>
+        <p class="text-xs text-gray-400 mt-0.5">Controla tu visibilidad y preferencias de descubrimiento</p>
+      </div>
+
+      <!-- Discovery Preferences Card -->
+      <section class="bg-gray-50 border border-gray-100 rounded-3xl p-5 space-y-5 shadow-sm">
+        <h3 class="font-bold text-gray-700 text-sm flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amora-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          Ajustes de Descubrimiento
+        </h3>
+
+        <!-- Show me preference -->
+        <div class="space-y-2">
+          <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Mostrarme</span>
+          <div class="grid grid-cols-3 gap-2">
+            <button type="button" class="pref-btn bg-amora-primary text-white border border-amora-primary py-2.5 text-xs font-bold rounded-2xl transition duration-150 active:scale-95" data-pref="mujeres">Mujeres</button>
+            <button type="button" class="pref-btn border border-gray-200 text-gray-500 py-2.5 text-xs font-bold rounded-2xl hover:bg-gray-100 transition duration-150 active:scale-95" data-pref="hombres">Hombres</button>
+            <button type="button" class="pref-btn border border-gray-200 text-gray-500 py-2.5 text-xs font-bold rounded-2xl hover:bg-gray-100 transition duration-150 active:scale-95" data-pref="todos">Todos</button>
+          </div>
+        </div>
+
+        <!-- Distance Slider -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Distancia Máxima</span>
+            <span id="distance-val" class="text-sm font-bold text-amora-primary">42 km</span>
+          </div>
+          <input type="range" id="distance-slider" min="2" max="100" value="42" 
+            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amora-primary focus:outline-none" />
+        </div>
+
+        <!-- Age Slider -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Rango de Edad</span>
+            <span id="age-val" class="text-sm font-bold text-amora-primary">18 - 32 años</span>
+          </div>
+          <input type="range" id="age-slider" min="18" max="60" value="32" 
+            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amora-primary focus:outline-none" />
+        </div>
+      </section>
+
+      <!-- Push Notifications Settings Card -->
+      <section class="bg-gray-50 border border-gray-100 rounded-3xl p-5 space-y-4 shadow-sm">
+        <h3 class="font-bold text-gray-700 text-sm flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amora-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+          </svg>
+          Notificaciones Push
+        </h3>
+
+        <!-- Toggle Switch 1 (Matches) -->
+        <div class="flex items-center justify-between py-1">
+          <span class="text-sm font-medium text-gray-600">Nuevos Matches</span>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" checked class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amora-primary"></div>
+          </label>
+        </div>
+
+        <!-- Toggle Switch 2 (Messages) -->
+        <div class="flex items-center justify-between py-1">
+          <span class="text-sm font-medium text-gray-600">Mensajes</span>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" checked class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amora-primary"></div>
+          </label>
+        </div>
+
+        <!-- Toggle Switch 3 (Super Likes) -->
+        <div class="flex items-center justify-between py-1">
+          <span class="text-sm font-medium text-gray-600">Super Likes</span>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amora-primary"></div>
+          </label>
+        </div>
+      </section>
+
+      <!-- Account Actions -->
+      <section class="space-y-3 pt-2">
+        <button id="save-settings-btn" class="w-full bg-amora-grad text-white font-bold py-4 rounded-2xl shadow-premium hover:brightness-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+          Guardar Preferencias
+        </button>
+
+        <button id="delete-account-btn" class="w-full bg-rose-50 hover:bg-rose-100 text-rose-500 font-bold py-4 rounded-2xl active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+          Eliminar Cuenta
+        </button>
+      </section>
+
+    </main>
+
+    <!-- Footer injected by components.js -->
+    <footer id="global-footer"></footer>
+
+  </div>
+
+  <!-- Database & Components -->
+  <script src="assets/js/mockData.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/main.js"></script>
+  
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Sliders logic
+      const distSlider = document.getElementById('distance-slider');
+      const distVal = document.getElementById('distance-val');
+      
+      distSlider.addEventListener('input', (e) => {
+        distVal.innerText = `${e.target.value} km`;
+      });
+
+      const ageSlider = document.getElementById('age-slider');
+      const ageVal = document.getElementById('age-val');
+      
+      ageSlider.addEventListener('input', (e) => {
+        ageVal.innerText = `18 - ${e.target.value} años`;
+      });
+
+      // Show me pref button toggling
+      const prefBtns = document.querySelectorAll('.pref-btn');
+      prefBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          prefBtns.forEach(b => {
+            b.className = "pref-btn border border-gray-200 text-gray-500 py-2.5 text-xs font-bold rounded-2xl hover:bg-gray-100 transition duration-150 active:scale-95";
+          });
+          btn.className = "pref-btn bg-amora-primary text-white border border-amora-primary py-2.5 text-xs font-bold rounded-2xl shadow-premium transition duration-150 active:scale-95";
+        });
+      });
+
+      // Save Settings
+      document.getElementById('save-settings-btn').addEventListener('click', () => {
+        window.showToast("Preferencias actualizadas", "success");
+      });
+
+      // Delete Account Flow (High Fidelity Modal warning)
+      document.getElementById('delete-account-btn').addEventListener('click', () => {
+        const confirmDelete = confirm("¿Estás completamente seguro de que deseas eliminar tu cuenta de AMORA? Esta acción no se puede deshacer.");
+        if (confirmDelete) {
+          window.showToast("Eliminando cuenta...", "error");
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

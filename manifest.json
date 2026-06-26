@@ -1,0 +1,16 @@
+{
+  "short_name": "AMORA",
+  "name": "AMORA - Dating App",
+  "icons": [
+    {
+      "src": "assets/img/logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ],
+  "start_url": "index.html",
+  "background_color": "#FF3B5C",
+  "theme_color": "#FF3B5C",
+  "display": "standalone",
+  "orientation": "portrait"
+}

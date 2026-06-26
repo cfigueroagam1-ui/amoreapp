@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMORA - Mensajes</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            amora: {
+              primary: '#FF3B5C',
+              medium: '#FF6B81',
+              light: '#FF9AA2',
+              dark: '#1E1E1E',
+              bg: '#F7F7F7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="app-container w-full bg-white flex flex-col justify-between overflow-hidden shadow-premium min-h-screen">
+    
+    <!-- Header injected by components.js -->
+    <header id="global-header"></header>
+
+    <!-- MAIN VIEW: INBOX (Message List) -->
+    <main id="inbox-view" class="flex-grow flex flex-col overflow-y-auto">
+      <div class="p-6 pb-2">
+        <h2 class="text-2xl font-bold text-gray-800">Mensajes</h2>
+        <p class="text-xs text-gray-400 mt-0.5">Conéctate y chatea con tus matches</p>
+      </div>
+
+      <!-- Quick Matches row (Visual only) -->
+      <section class="p-6 pt-4 pb-2 border-b border-gray-50">
+        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Nuevos Matches</h3>
+        <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+          
+          <!-- Match 1 -->
+          <div onclick="window.location.href='explore.html'" class="flex flex-col items-center flex-shrink-0 cursor-pointer active:scale-95 transition-all">
+            <div class="w-12 h-12 rounded-full border-2 border-amora-primary p-0.5 overflow-hidden bg-gray-50 flex items-center justify-center">
+              <div class="w-full h-full rounded-full overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="100%" height="100%">
+                  <rect width="100%" height="100%" fill="#F59E0B" />
+                  <path d="M20 120 C20 100, 30 86, 50 86 C70 86, 80 100, 80 120 Z" fill="#EF4444" />
+                  <rect x="44" y="70" width="12" height="18" fill="#FFD8A8" rx="2" />
+                  <rect x="32" y="38" width="36" height="38" rx="10" fill="#FFE3C4" />
+                  <path d="M28 40 L34 26 L42 22 L50 25 L58 20 L66 28 L72 38 L68 36 L58 32" fill="#FCD34D" />
+                </svg>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold text-gray-600 mt-1.5">Alejandro</span>
+          </div>
+
+          <!-- Match 2 -->
+          <div onclick="window.location.href='explore.html'" class="flex flex-col items-center flex-shrink-0 cursor-pointer active:scale-95 transition-all">
+            <div class="w-12 h-12 rounded-full border-2 border-amora-primary p-0.5 overflow-hidden bg-gray-50 flex items-center justify-center">
+              <div class="w-full h-full rounded-full overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="100%" height="100%">
+                  <rect width="100%" height="100%" fill="#7C3AED" />
+                  <circle cx="50" cy="50" r="50" fill="#EA580C" />
+                  <circle cx="50" cy="40" r="18" fill="#FFFFFF" />
+                  <path d="M50 63 C32 63 20 73 20 85 H80 C80 73 68 63 50 63 Z" fill="#FFFFFF" />
+                </svg>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold text-gray-600 mt-1.5">Isabella</span>
+          </div>
+
+          <!-- Add Match Call-to-action -->
+          <div onclick="window.location.href='explore.html'" class="flex flex-col items-center flex-shrink-0 cursor-pointer active:scale-95 transition-all">
+            <div class="w-12 h-12 rounded-full border-2 border-dashed border-gray-200 flex items-center justify-center text-gray-400 hover:border-amora-primary hover:text-amora-primary bg-gray-50/30">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+              </svg>
+            </div>
+            <span class="text-[10px] font-bold text-gray-400 mt-1.5">Buscar</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Active Chats List (JS driven) -->
+      <section class="flex-grow">
+        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider px-6 pt-4 pb-1">Conversaciones</h3>
+        <div id="inbox-list" class="divide-y divide-gray-50">
+          <!-- Dynamic rendering by chat.js -->
+        </div>
+      </section>
+    </main>
+
+
+    <!-- CHAT VIEW: CHAT CONVERSATION CONTAINER (Hidden initially) -->
+    <main id="chat-view" class="hidden flex-grow flex flex-col justify-between bg-white overflow-hidden">
+      <!-- Chat Header -->
+      <div class="sticky top-0 z-30 bg-white border-b border-gray-100 px-4 py-3 flex items-center justify-between shadow-sm">
+        <div class="flex items-center gap-3">
+          <!-- Back button -->
+          <button id="chat-back-btn" class="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <!-- Avatar -->
+          <div id="chat-header-avatar" class="w-10 h-10 rounded-full border border-gray-100 overflow-hidden bg-gray-50 flex items-center justify-center">
+            <!-- Dynamic Avatar -->
+          </div>
+
+          <!-- Name & Status -->
+          <div>
+            <h3 id="chat-header-name" class="font-bold text-gray-800 text-sm leading-tight">Sofía</h3>
+            <span class="text-[10px] text-emerald-500 font-semibold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> Conectado(a)
+            </span>
+          </div>
+        </div>
+
+        <!-- Phone call / Video Call Options (Simulated UI) -->
+        <div class="flex items-center gap-1.5">
+          <button onclick="window.showToast('Llamada de voz no disponible en versión de prueba', 'info')" class="p-2 text-gray-400 hover:text-amora-primary hover:bg-gray-50 rounded-full transition focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages Thread Area -->
+      <div id="chat-messages-container" class="flex-grow p-6 overflow-y-auto space-y-4 flex flex-col bg-gray-50/50">
+        <!-- Message Bubbles dynamically loaded here -->
+      </div>
+
+      <!-- Chat Bottom Input Bar -->
+      <form id="chat-send-form" class="p-4 bg-white border-t border-gray-100 flex items-center gap-3">
+        <input type="text" id="chat-input" required placeholder="Escribe un mensaje..." autocomplete="off"
+          class="flex-grow px-4 py-3.5 border border-gray-200 rounded-2xl focus:outline-none focus:border-amora-primary text-sm text-gray-800 placeholder-gray-400 bg-gray-50/50" />
+        
+        <button type="submit" class="w-12 h-12 bg-amora-grad text-white rounded-2xl flex items-center justify-center shadow-md active:scale-95 transition-all hover:brightness-105 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-90 transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+          </svg>
+        </button>
+      </form>
+    </main>
+
+    <!-- Footer injected by components.js -->
+    <footer id="global-footer"></footer>
+
+  </div>
+
+  <!-- Database & Components -->
+  <script src="assets/js/mockData.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/main.js"></script>
+  <!-- Chat Logic -->
+  <script src="assets/js/chat.js"></script>
+
+  <script>
+    let chatManager = null;
+    window.addEventListener('DOMContentLoaded', () => {
+      // Initialize Amora Chat Controller
+      chatManager = new window.AmoraChatManager();
+    });
+  </script>
+</body>
+</html>

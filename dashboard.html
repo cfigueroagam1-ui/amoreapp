@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMORA - Inicio</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            amora: {
+              primary: '#FF3B5C',
+              medium: '#FF6B81',
+              light: '#FF9AA2',
+              dark: '#1E1E1E',
+              bg: '#F7F7F7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="app-container w-full bg-white flex flex-col justify-between overflow-y-auto shadow-premium min-h-screen">
+    
+    <!-- Header injected by components.js -->
+    <header id="global-header"></header>
+
+    <!-- Main Content -->
+    <main class="flex-grow p-6 space-y-6">
+      
+      <!-- User Greeting & Hero card -->
+      <section class="bg-amora-grad text-white rounded-3xl p-6 relative overflow-hidden shadow-premium">
+        <div class="absolute w-24 h-24 bg-white opacity-5 rounded-full -top-6 -right-6 floating-bubble-1"></div>
+        <div class="z-10 relative">
+          <h2 class="text-2xl font-bold">¡Hola de nuevo, Tú! 🌟</h2>
+          <p class="text-white/80 text-sm mt-1">Hoy es un gran día para encontrar tu conexión ideal.</p>
+          <a href="explore.html" class="inline-flex items-center gap-2 mt-4 bg-white text-amora-primary font-bold px-5 py-2.5 rounded-full text-xs shadow-lg active:scale-95 transition-all">
+            Comenzar a Deslizar
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Grid statistics -->
+      <section class="grid grid-cols-3 gap-4">
+        <div class="bg-rose-50 border border-rose-100/50 p-4 rounded-2xl text-center">
+          <span class="text-2xl font-bold text-amora-primary block">24</span>
+          <span class="text-[10px] uppercase font-bold tracking-wide text-rose-400">Likes</span>
+        </div>
+        <div class="bg-purple-50 border border-purple-100/50 p-4 rounded-2xl text-center">
+          <span class="text-2xl font-bold text-purple-600 block">7</span>
+          <span class="text-[10px] uppercase font-bold tracking-wide text-purple-400">Matches</span>
+        </div>
+        <div class="bg-blue-50 border border-blue-100/50 p-4 rounded-2xl text-center">
+          <span class="text-2xl font-bold text-blue-600 block">3</span>
+          <span class="text-[10px] uppercase font-bold tracking-wide text-blue-400">Mensajes</span>
+        </div>
+      </section>
+
+      <!-- Recommendations Section (resolves skeleton) -->
+      <section class="space-y-4">
+        <div class="flex justify-between items-center">
+          <h3 class="font-bold text-gray-800">Recomendados para ti</h3>
+          <a href="explore.html" class="text-xs text-amora-primary font-bold hover:underline">Ver todos</a>
+        </div>
+
+        <!-- Skeleton Loading State -->
+        <div id="recs-skeleton" class="flex gap-4 overflow-x-hidden py-1">
+          <div class="w-32 flex-shrink-0 space-y-2">
+            <div class="w-32 h-44 rounded-2xl skeleton"></div>
+            <div class="h-3 w-3/4 rounded-full skeleton"></div>
+            <div class="h-2.5 w-1/2 rounded-full skeleton"></div>
+          </div>
+          <div class="w-32 flex-shrink-0 space-y-2">
+            <div class="w-32 h-44 rounded-2xl skeleton"></div>
+            <div class="h-3 w-5/6 rounded-full skeleton"></div>
+            <div class="h-2.5 w-2/3 rounded-full skeleton"></div>
+          </div>
+          <div class="w-32 flex-shrink-0 space-y-2">
+            <div class="w-32 h-44 rounded-2xl skeleton"></div>
+            <div class="h-3 w-2/3 rounded-full skeleton"></div>
+            <div class="h-2.5 w-1/2 rounded-full skeleton"></div>
+          </div>
+        </div>
+
+        <!-- Loaded Recommendations Grid -->
+        <div id="recs-loaded" class="hidden flex gap-4 overflow-x-auto py-1 scrollbar-hide">
+          <!-- Dynamic rendering via JS -->
+        </div>
+      </section>
+
+      <!-- Recent Activity Feed -->
+      <section class="space-y-3">
+        <h3 class="font-bold text-gray-800">Actividad Reciente</h3>
+        
+        <div class="space-y-3">
+          <div class="flex items-center gap-4 p-3 bg-gray-50/50 hover:bg-gray-50 border border-gray-100 rounded-2xl transition duration-150">
+            <div class="w-10 h-10 rounded-full bg-rose-100 text-amora-primary flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="flex-grow">
+              <span class="text-sm font-semibold text-gray-800 block">A Sofía le ha gustado tu perfil</span>
+              <span class="text-[10px] text-gray-400">Hace 15 minutos</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 p-3 bg-gray-50/50 hover:bg-gray-50 border border-gray-100 rounded-2xl transition duration-150">
+            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </div>
+            <div class="flex-grow">
+              <span class="text-sm font-semibold text-gray-800 block">Mateo te envió un mensaje</span>
+              <span class="text-[10px] text-gray-400">Ayer</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer injected by components.js -->
+    <footer id="global-footer"></footer>
+
+  </div>
+
+  <!-- Database Scripts -->
+  <script src="assets/js/mockData.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Simulate loading data and resolving skeletons
+    window.addEventListener('DOMContentLoaded', () => {
+      const skel = document.getElementById('recs-skeleton');
+      const loaded = document.getElementById('recs-loaded');
+
+      setTimeout(() => {
+        // Hide skeleton
+        skel.classList.add('hidden');
+        // Show actual items
+        loaded.classList.remove('hidden');
+
+        const profiles = window.AMORA_DATA.profiles;
+        // Take a few profiles to recommend
+        const recommended = [profiles[0], profiles[2], profiles[4], profiles[6]];
+
+        loaded.innerHTML = recommended.map(p => `
+          <div onclick="window.location.href='explore.html'" class="w-32 flex-shrink-0 cursor-pointer group active:scale-95 transition-all">
+            <div class="w-32 h-44 rounded-2xl overflow-hidden relative shadow-md bg-gray-50 border border-gray-100 flex items-center justify-center">
+              ${p.image}
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-3">
+                <span class="text-xs font-bold text-white truncate">${p.name}, ${p.age}</span>
+                <span class="text-[9px] text-white/80 truncate">${p.city}</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+      }, 1000); // 1 second loading simulation
+    });
+  </script>
+</body>
+</html>

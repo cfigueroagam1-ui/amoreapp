@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMORA - Crear Cuenta</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            amora: {
+              primary: '#FF3B5C',
+              medium: '#FF6B81',
+              light: '#FF9AA2',
+              dark: '#1E1E1E',
+              bg: '#F7F7F7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="app-container w-full bg-white flex flex-col justify-between overflow-y-auto shadow-premium relative min-h-screen">
+    
+    <!-- Top Header -->
+    <div class="bg-amora-grad pt-8 pb-6 w-full flex flex-col items-center justify-center relative overflow-hidden rounded-b-[40px]">
+      <div class="absolute w-40 h-40 bg-white opacity-5 rounded-full -top-10 -left-10 floating-bubble-1"></div>
+      <div class="absolute w-32 h-32 bg-white opacity-5 rounded-full -bottom-10 -right-10 floating-bubble-2"></div>
+      
+      <!-- Back Arrow -->
+      <a href="login.html" class="absolute left-6 top-8 text-white hover:opacity-80 transition duration-150">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      </a>
+
+      <!-- Brand Logo -->
+      <div class="z-10 flex flex-col items-center">
+        <img src="assets/img/logo.svg" alt="AMORA Logo" class="w-12 h-12 drop-shadow-md brightness-0 invert">
+        <h2 class="text-xl font-extrabold tracking-wider text-white uppercase mt-1">AMORA</h2>
+      </div>
+    </div>
+
+    <!-- Main Registration Form -->
+    <div class="flex-grow px-8 py-8 flex flex-col justify-center">
+      <div class="text-center mb-6">
+        <h3 class="text-2xl font-bold text-gray-800">Crea tu Cuenta</h3>
+        <p class="text-gray-500 text-sm mt-1">Encuentra a tu alma gemela hoy mismo</p>
+      </div>
+
+      <form id="register-form" class="space-y-5">
+        <!-- Name Input -->
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2" for="name">Nombre Completo</label>
+          <input type="text" id="name" required placeholder="Tu nombre" 
+            class="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-amora-primary focus:ring-2 focus:ring-amora-light/30 transition duration-200 text-gray-800 placeholder-gray-400 bg-gray-50/50" />
+        </div>
+
+        <!-- Email Input -->
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2" for="email">Correo Electrónico</label>
+          <input type="email" id="email" required placeholder="ejemplo@correo.com" 
+            class="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-amora-primary focus:ring-2 focus:ring-amora-light/30 transition duration-200 text-gray-800 placeholder-gray-400 bg-gray-50/50" />
+        </div>
+
+        <!-- Grid Age / City -->
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2" for="age">Edad</label>
+            <input type="number" id="age" required min="18" max="99" placeholder="Edad" 
+              class="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-amora-primary focus:ring-2 focus:ring-amora-light/30 transition duration-200 text-gray-800 placeholder-gray-400 bg-gray-50/50" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2" for="city">Ciudad</label>
+            <input type="text" id="city" required placeholder="P. ej. Madrid" 
+              class="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-amora-primary focus:ring-2 focus:ring-amora-light/30 transition duration-200 text-gray-800 placeholder-gray-400 bg-gray-50/50" />
+          </div>
+        </div>
+
+        <!-- Gender Selection (Micro-interaction Tags) -->
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Identidad de Género</label>
+          <div class="grid grid-cols-3 gap-3">
+            <button type="button" class="gender-btn border border-gray-200 rounded-2xl py-2.5 text-sm font-semibold text-gray-500 hover:bg-gray-50 focus:outline-none transition-all duration-200 active:scale-95" data-gender="mujer">Mujer</button>
+            <button type="button" class="gender-btn border border-gray-200 rounded-2xl py-2.5 text-sm font-semibold text-gray-500 hover:bg-gray-50 focus:outline-none transition-all duration-200 active:scale-95" data-gender="hombre">Hombre</button>
+            <button type="button" class="gender-btn border border-gray-200 rounded-2xl py-2.5 text-sm font-semibold text-gray-500 hover:bg-gray-50 focus:outline-none transition-all duration-200 active:scale-95" data-gender="otro">Otro</button>
+          </div>
+        </div>
+
+        <!-- Password Input -->
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2" for="password">Contraseña</label>
+          <input type="password" id="password" required placeholder="Mínimo 6 caracteres" 
+            class="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-amora-primary focus:ring-2 focus:ring-amora-light/30 transition duration-200 text-gray-800 placeholder-gray-400 bg-gray-50/50" />
+        </div>
+
+        <!-- Terms and Conditions checkbox -->
+        <div class="flex items-start gap-3 mt-1">
+          <input type="checkbox" id="terms" required class="mt-1 h-4 w-4 text-amora-primary focus:ring-amora-light border-gray-300 rounded" />
+          <label for="terms" class="text-xs text-gray-400 leading-snug">
+            Acepto las <a href="#" class="text-amora-primary font-semibold hover:underline">Políticas de Privacidad</a> y los <a href="#" class="text-amora-primary font-semibold hover:underline">Términos del Servicio</a> de AMORA.
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="submit-btn" 
+          class="w-full bg-amora-grad hover:brightness-105 active:scale-[0.98] text-white font-bold py-4 rounded-2xl shadow-premium transition duration-200 flex items-center justify-center mt-2">
+          <span>Comenzar Aventura</span>
+          <div id="loader" class="hidden w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin ml-3"></div>
+        </button>
+      </form>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="absolute top-4 left-4 right-4 z-50 pointer-events-none"></div>
+
+    <!-- Bottom Footer Redirect -->
+    <div class="py-6 bg-gray-50 border-t border-gray-100 text-center text-sm rounded-t-[30px]">
+      <span class="text-gray-500">¿Ya tienes una cuenta?</span>
+      <a href="login.html" class="text-amora-primary font-bold ml-1 hover:underline">Inicia Sesión</a>
+    </div>
+
+  </div>
+
+  <script>
+    // Gender Button Selection
+    const genderBtns = document.querySelectorAll('.gender-btn');
+    let selectedGender = '';
+
+    genderBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        genderBtns.forEach(b => {
+          b.classList.remove('bg-amora-primary', 'text-white', 'border-amora-primary', 'shadow-premium');
+          b.classList.add('border-gray-200', 'text-gray-500');
+        });
+        
+        btn.classList.remove('border-gray-200', 'text-gray-500');
+        btn.classList.add('bg-amora-primary', 'text-white', 'border-amora-primary', 'shadow-premium');
+        selectedGender = btn.dataset.gender;
+      });
+    });
+
+    // Toast Alert
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      
+      const colors = type === 'success' 
+        ? 'bg-emerald-500 text-white shadow-emerald-200' 
+        : 'bg-rose-500 text-white shadow-rose-200';
+        
+      toast.className = `p-4 mb-3 rounded-2xl flex items-center justify-between shadow-lg transform translate-y-[-20px] opacity-0 transition-all duration-300 pointer-events-auto ${colors}`;
+      toast.innerHTML = `
+        <div class="flex items-center gap-3">
+          ${type === 'success' ? `
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+          ` : `
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+            </svg>
+          `}
+          <span class="text-sm font-semibold">${message}</span>
+        </div>
+      `;
+      
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.classList.remove('translate-y-[-20px]', 'opacity-0');
+      }, 10);
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-[-20px]', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // Submit Handling
+    const registerForm = document.getElementById('register-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const loader = document.getElementById('loader');
+
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const age = parseInt(document.getElementById('age').value);
+      
+      if (!selectedGender) {
+        showToast("Por favor selecciona tu identidad de género", "error");
+        return;
+      }
+      
+      if (age < 18) {
+        showToast("Debes ser mayor de 18 años para registrarte", "error");
+        return;
+      }
+
+      // Show Loader
+      loader.classList.remove('hidden');
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-90');
+      
+      setTimeout(() => {
+        showToast("¡Registro exitoso! Creando tu cuenta...", "success");
+        
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 1200);
+      }, 1500);
+    });
+  </script>
+</body>
+</html>

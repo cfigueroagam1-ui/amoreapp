@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMORA - Perfil de Usuario</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            amora: {
+              primary: '#FF3B5C',
+              medium: '#FF6B81',
+              light: '#FF9AA2',
+              dark: '#1E1E1E',
+              bg: '#F7F7F7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="app-container w-full bg-white flex flex-col justify-between overflow-y-auto shadow-premium min-h-screen">
+    
+    <!-- Header injected by components.js -->
+    <header id="global-header"></header>
+
+    <!-- Main Content -->
+    <main class="flex-grow p-6 space-y-6">
+      
+      <!-- Profile Header Visual -->
+      <section class="flex flex-col items-center text-center">
+        <!-- Avatar Circle with Edit Badge -->
+        <div class="relative group">
+          <div id="user-avatar-display" class="w-28 h-28 rounded-full border-4 border-amora-light/40 overflow-hidden shadow-lg bg-gray-50 flex items-center justify-center">
+            <!-- SVG Avatar injected via JS -->
+          </div>
+          <!-- Edit badge -->
+          <label for="avatar-upload-file" class="absolute bottom-0 right-0 bg-amora-primary text-white p-2 rounded-full shadow-md cursor-pointer hover:scale-105 active:scale-95 transition duration-150">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </label>
+          <input type="file" id="avatar-upload-file" class="hidden" accept="image/*" />
+        </div>
+
+        <h2 class="text-2xl font-bold text-gray-800 mt-4">Tú, 26</h2>
+        <p class="text-xs text-gray-400 font-medium flex items-center gap-1 justify-center mt-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          Madrid, España
+        </p>
+      </section>
+
+      <!-- Photos Grid Section -->
+      <section class="space-y-3">
+        <h3 class="font-bold text-gray-800 text-sm">Mis Fotos de Perfil</h3>
+        <div class="grid grid-cols-3 gap-3">
+          
+          <!-- Photo Slot 1 (Primary) -->
+          <div class="aspect-[3/4] rounded-2xl border border-gray-100 overflow-hidden relative shadow-sm bg-gray-50 flex items-center justify-center">
+            <div id="photo-slot-1" class="w-full h-full"></div>
+            <span class="absolute top-2 left-2 bg-amora-primary text-[8px] font-bold text-white px-2 py-0.5 rounded-full">PRINCIPAL</span>
+          </div>
+
+          <!-- Photo Slot 2 -->
+          <div id="photo-slot-2-container" class="aspect-[3/4] rounded-2xl border border-gray-100 overflow-hidden relative shadow-sm bg-gray-50 flex items-center justify-center">
+            <div id="photo-slot-2" class="w-full h-full"></div>
+            <button onclick="deletePhoto(2)" class="absolute top-1 right-1 bg-black/60 hover:bg-black/80 text-white rounded-full p-1 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Add Photo Slots -->
+          <div onclick="triggerAddPhoto(3)" id="photo-slot-3-container" class="aspect-[3/4] rounded-2xl border-2 border-dashed border-gray-200 hover:border-amora-primary transition duration-150 flex flex-col items-center justify-center gap-1 cursor-pointer text-gray-400 hover:text-amora-primary bg-gray-50/20 active:scale-95">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            <span class="text-[9px] font-bold uppercase tracking-wide">Añadir</span>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- Input file for uploading mock photos -->
+      <input type="file" id="photo-file-input" class="hidden" accept="image/*" />
+
+      <!-- Edit Bio Section -->
+      <section class="space-y-3">
+        <label class="block font-bold text-gray-800 text-sm" for="bio">Sobre Mí</label>
+        <textarea id="bio-textarea" rows="4" 
+          class="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-amora-primary focus:ring-2 focus:ring-amora-light/30 transition duration-200 text-gray-800 placeholder-gray-400 bg-gray-50/50 resize-none text-sm"></textarea>
+      </section>
+
+      <!-- Form Actions -->
+      <section class="space-y-3 pt-2">
+        <button id="save-profile-btn" class="w-full bg-amora-grad text-white font-bold py-4 rounded-2xl shadow-premium hover:brightness-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+          <span>Guardar Cambios</span>
+          <div id="save-loader" class="hidden w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+        </button>
+
+        <button id="logout-btn" class="w-full bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 font-bold py-4 rounded-2xl active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          <span>Cerrar Sesión</span>
+        </button>
+      </section>
+
+    </main>
+
+    <!-- Footer injected by components.js -->
+    <footer id="global-footer"></footer>
+
+  </div>
+
+  <!-- Database & Components -->
+  <script src="assets/js/mockData.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/main.js"></script>
+  
+  <script>
+    let activeUploadSlot = null;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const user = window.AMORA_DATA.currentUser;
+      
+      // Load current user profile details
+      document.getElementById('user-avatar-display').innerHTML = user.avatar;
+      document.getElementById('photo-slot-1').innerHTML = user.photos[0] || user.avatar;
+      document.getElementById('photo-slot-2').innerHTML = user.photos[1] || user.avatar;
+      document.getElementById('bio-textarea').value = user.description;
+
+      // Handle Avatar Edit Upload Simulation
+      document.getElementById('avatar-upload-file').addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+          window.showToast("Subiendo avatar...", "info");
+          setTimeout(() => {
+            // Generate a random colourful gradient SVG as mock avatar
+            const randomId = Math.floor(Math.random() * 8) + 1;
+            const newAvatar = window.AMORA_DATA.getProfileSVG(randomId);
+            
+            // Update local state and display
+            user.avatar = newAvatar;
+            document.getElementById('user-avatar-display').innerHTML = newAvatar;
+            document.getElementById('photo-slot-1').innerHTML = newAvatar;
+            window.showToast("Avatar actualizado correctamente", "success");
+            window.initNavigation(); // Redraw header avatar/state if applicable
+          }, 1200);
+        }
+      });
+
+      // Handle custom photo files selection
+      document.getElementById('photo-file-input').addEventListener('change', (e) => {
+        if (e.target.files.length > 0 && activeUploadSlot) {
+          const slotId = activeUploadSlot;
+          window.showToast(`Cargando foto ${slotId}...`, "info");
+          
+          setTimeout(() => {
+            const randomColorGrad = `
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="100%" height="100%">
+                <defs>
+                  <linearGradient id="up-g-${slotId}" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#3B82F6" />
+                    <stop offset="100%" stop-color="#EC4899" />
+                  </linearGradient>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#up-g-${slotId})" />
+                <text x="50%" y="50%" fill="#FFFFFF" font-size="10" text-anchor="middle" font-family="Outfit" font-weight="bold">FOTO CARGADA</text>
+              </svg>
+            `;
+            
+            const slotContainer = document.getElementById(`photo-slot-${slotId}-container`);
+            slotContainer.className = "aspect-[3/4] rounded-2xl border border-gray-100 overflow-hidden relative shadow-sm bg-gray-50 flex items-center justify-center cursor-pointer";
+            slotContainer.innerHTML = `
+              <div id="photo-slot-${slotId}" class="w-full h-full">${randomColorGrad}</div>
+              <button onclick="deletePhoto(${slotId})" class="absolute top-1 right-1 bg-black/60 hover:bg-black/80 text-white rounded-full p-1 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            `;
+            
+            window.showToast(`Foto ${slotId} subida con éxito`, "success");
+            activeUploadSlot = null;
+          }, 1500);
+        }
+      });
+
+      // Save Profile Button
+      const saveBtn = document.getElementById('save-profile-btn');
+      const saveLoader = document.getElementById('save-loader');
+
+      saveBtn.addEventListener('click', () => {
+        const newBio = document.getElementById('bio-textarea').value;
+        saveLoader.classList.remove('hidden');
+        saveBtn.disabled = true;
+        
+        setTimeout(() => {
+          user.description = newBio;
+          saveLoader.classList.add('hidden');
+          saveBtn.disabled = false;
+          window.showToast("Cambios guardados con éxito", "success");
+        }, 1200);
+      });
+
+      // Sign Out Button
+      document.getElementById('logout-btn').addEventListener('click', () => {
+        window.showToast("Cerrando sesión...", "info");
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 1200);
+      });
+    });
+
+    // Helper functions in window namespace for slot additions/deletions
+    window.triggerAddPhoto = function(slotId) {
+      activeUploadSlot = slotId;
+      document.getElementById('photo-file-input').click();
+    };
+
+    window.deletePhoto = function(slotId) {
+      event.stopPropagation();
+      const slotContainer = document.getElementById(`photo-slot-${slotId}-container`);
+      
+      // Reset back to dashed ADD button state
+      slotContainer.className = "aspect-[3/4] rounded-2xl border-2 border-dashed border-gray-200 hover:border-amora-primary transition duration-150 flex flex-col items-center justify-center gap-1 cursor-pointer text-gray-400 hover:text-amora-primary bg-gray-50/20 active:scale-95";
+      slotContainer.setAttribute('onclick', `triggerAddPhoto(${slotId})`);
+      slotContainer.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        <span class="text-[9px] font-bold uppercase tracking-wide">Añadir</span>
+      `;
+      window.showToast(`Foto ${slotId} eliminada`, "info");
+    };
+  </script>
+</body>
+</html>
